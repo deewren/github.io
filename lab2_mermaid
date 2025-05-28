@@ -1,0 +1,9 @@
+```mermaid
+flowchart TD
+    A[Lead Inquires About Apartment] --> B[Schedule Tour]
+    B --> C{Did They Show Up?}
+    C -- Yes --> D[Tour the Apartment]
+    C -- No --> E[Follow Up with Lead]
+    D --> F{Interested?}
+    F -- Yes --> G[Start Application]
+    F -- No --> H[Thank Them and Offer Future Listings]
