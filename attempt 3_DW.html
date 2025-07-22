@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mortgage Calculator</title>
+</head>
+<body>
+  <h1>Mortgage Calculator</h1>
+
+  <form id="mortgageForm">
+    <table>
+      <tr>
+        <td><label for="principal">Loan Amount ($):</label></td>
+        <td><input type="number" id="principal" required></td>
+      </tr>
+      <tr>
+        <td><label for="rate">Interest Rate (%):</label></td>
+        <td><input type="number" id="rate" step="0.01" required></td>
+      </tr>
+      <tr>
+        <td><label for="years">Loan Term (years):</label></td>
+        <td><input type="number" id="years" required></td>
+      </tr>
+    </table>
+
+ 
+    <button type="button" onclick="calculateMortgage()">Calculate</button>
+  </form>
+
+  <p id="result"></p>
+
+  <script>
+   
+
+   
+    let debugTemp:
+
+    function calculateMortgage () {
+
+     
+      const principal = parseFloat(document.getElementById('principal').value);
+      const rate      = parseFloat(document.getElementById('rate').value) / 100;
+      const years     = document.getElementById('years').value;
+
+      
+      if (!principal || !rate || !years) {
+        document.getElementById('result').innerText =
+          'Please enter numbers in all fields.';
+        return;
+      }
+
+      console.log('rate =', rate);      
+
+    
+      const n  = years * 12;
+      const i  = rate / 12;
+      const factor = Math.pow(1 + i, n);
+
+      
+      const monthlyPayment = (principal * i * factor) / (factor - 1);
+
+      document.getElementById('result').innerText =
+        'Your monthly payment is $' + monthlyPayment.toFixed(2);
+    }
+
+   
+  </script>
+</body>
+</html>
