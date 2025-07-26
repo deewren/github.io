@@ -1,11 +1,23 @@
-function fetchGradeData() {
-  console.log("Fetching grade data…");
-  return [];          // temporary placeholder data
+async function fetchGradeData() {
+  const res = await fetch('/api/grades');
+  return await res.json();
 }
 
 function populateGradebook(data) {
-  console.log("Populating gradebook with data:", data);
+  const tbody = document.querySelector('#gradeTable tbody');
+  tbody.innerHTML = '';
+  data.forEach(r => {
+    const tr = document.createElement('tr');
+    [r.student, r.assignment, r.score].forEach(text => {
+      const td = document.createElement('td');
+      td.textContent = text;
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
 }
 
-const gradeData = fetchGradeData();
-populateGradebook(gradeData);
+document.addEventListener('DOMContentLoaded', async () => {
+  const data = await fetchGradeData();
+  populateGradebook(data);
+});
